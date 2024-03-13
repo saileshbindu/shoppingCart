@@ -3,7 +3,7 @@ const validator = require("validator");
 const bcrypt = require("bcryptjs")
 
 
-const userSchema = mongoose.Schema({
+const userSchema = new mongoose.Schema({
     name: {
         type: 'string',
         required: true,
@@ -42,7 +42,7 @@ userSchema.statics.isEmailTaken = async function (email){
     return !!user
 }
 
-userSchema.methods.isPasswordMatch =  async function(password){
+userSchema.methods.isPasswordMatch =  async function (password){
     const regPassword = await bcrypt.compare(password, this.password);
     return regPassword
 }
